@@ -1,0 +1,56 @@
+version: '3.7'
+services:
+  web:
+    build:
+      context: .
+      target: development
+    command: sh -c "rm -f tmp/pids/server.pid && bundle install --jobs 10 --retry 5 && bundle exec rails s -p 3010 -b '0.0.0.0'"
+    volumes:
+      - type: bind
+        source: .
+        target: /var/app
+    depends_on:
+      - postgres
+    environment:
+      VIRTUAL_HOST: app.municipies-census.localhost
+      DATABASE_URL: postgres://company:dev@postgres
+      RAILS_ENV: development
+    ports:
+      - 3010:3010
+    networks:
+      - company-network
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=company
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_HOST_AUTH_METHOD=md5
+      - POSTGRES_INITDB_ARGS=--auth-host=md5
+    ports:
+      - 5432:5432
+    volumes:
+      - ./dumps:/dumps
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - company-network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.nginx
+    restart: always
+    links:
+      - web
+    ports:
+      - '80:80'
+    networks:
+      - company-network
+
+volumes:
+  bundle_vendor:
+  pgdata:
+
+networks:
+  company-network:
+    driver: bridge

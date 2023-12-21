@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url:  <%= ENV["DATABASE_URL"] || "postgres://company:dev@localhost" %>
+
+development:
+  <<: *default
+  database: municipies_census_development
+
+test:
+  <<: *default
+  database: municipies_census_test
+
+production:
+  <<: *default
+  database: municipies_census_production
+  username: municipies_census
+  password: <%= ENV["MUNICIPIES_CENSUS_DATABASE_PASSWORD"] %>
