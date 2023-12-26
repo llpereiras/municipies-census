@@ -33,8 +33,9 @@ class BaseQuery
   attr_accessor :relation, :params
 
   def order
-    #  TODO: implement order
-    @relation
+    order = Array(params[:sort]).filter_map { |sort_param| order_attributes[sort_param.to_sym] }
+
+    @relation = relation.order(order)
   end
 
   def paginate
