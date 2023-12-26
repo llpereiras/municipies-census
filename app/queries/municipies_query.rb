@@ -14,6 +14,15 @@ class MunicipiesQuery < BaseQuery
     filter_by_name_start
   end
 
+  def order_attributes
+    {
+      name_asc: 'municipies.name asc',
+      name_desc: 'municipies.name desc',
+      id_asc: 'municipies.id asc',
+      id_desc: 'municipies.id desc'
+    }
+  end
+
   private
 
   def filter_by_id
@@ -29,5 +38,9 @@ class MunicipiesQuery < BaseQuery
     @relation = relation.where(
       municipies[:name].matches("#{params[:name_start]}%")
     )
+  end
+
+  def order
+
   end
 end

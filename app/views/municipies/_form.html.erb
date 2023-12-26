@@ -1,0 +1,22 @@
+<div class="main w-max m-auto mt-10">
+  <h2 class="text-2xl mb-6">New Municipy</h2>
+
+  <%= form_for(@municipy) do |f| %>
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "name of municipy"
+      %>
+    </div>
+
+    <% unless @municipy.new_record? %>
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.select(:status, Municipy.statuses, :prompt => 'Select') %>
+    </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Save", class: "rounded mt-6 px-4 bg-blue-500" %>
+    </div>
+  <% end %>
+</div>

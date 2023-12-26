@@ -1,0 +1,24 @@
+<table class="w-full p-5 text-gray-700">
+  <thead>
+    <tr>
+      <th class="text-left text-blue-900">Name</th>
+      <th class="text-left text-blue-900">Status</th>
+      <th class="text-left text-blue-900">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @municipies.each do |municipy| %>
+    <tr>
+      <td><%= municipy.name %></td>
+      <td><%= municipy.status %></td>
+      <td class="flex flex-row">
+        <%= link_to('Edit', edit_municipy_path(municipy.id), class: "rounded mt-6 px-4 bg-blue-300") %>
+        <%= form_for :municipy, url: inactive_municipy_path(municipy.id), method: :post do |f|%>
+          <%= f.submit "Inactive", class: "rounded mt-6 px-4 bg-red-500" %>
+        <%end%>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

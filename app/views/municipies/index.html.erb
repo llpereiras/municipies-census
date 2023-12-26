@@ -1,0 +1,16 @@
+
+<div class="w-full p-3">
+  <!--Table Card-->
+  <div class="bg-white border rounded shadow">
+    <div class="border-b p-3">
+      <h5 class="font-bold uppercase text-gray-600">Municipies</h5>
+    </div>
+    <div class="p-5">
+      <%= render('list') %>
+    </div>
+    <div class="p-5">
+      <%= link_to('New municipy', new_municipy_path, class: "rounded mt-6 px-4 bg-green-300") %>
+    </div>
+  </div>
+  <!--/table Card-->
+</div>
