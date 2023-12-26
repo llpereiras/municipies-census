@@ -5,4 +5,6 @@ class Municipy < ApplicationRecord
     active: 'active',
     inactive: 'inactive'
   }
+
+  validates :name, presence: true
 end
