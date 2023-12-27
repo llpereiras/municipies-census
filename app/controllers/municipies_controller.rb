@@ -34,7 +34,7 @@ class MunicipiesController < ApplicationController
   private
 
   def upsert_params
-    params.require(:municipy).permit(:name, :status).merge(id: params[:id])
+    params.require(:municipy).permit(:name, :status).merge(id: params[:id]).compact_blank
   end
 
   def search_params

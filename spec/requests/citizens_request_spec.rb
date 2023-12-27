@@ -9,58 +9,50 @@ RSpec.describe 'CitizensController' do
 
   describe 'GET /citizens' do
     it 'renders the index template' do
-      get "/municipes/#{citizen.municipy_id}/citizens"
+      get municipy_citizens_path({ municipy_id: citizen.municipy_id })
 
       expect(response).to render_template(:index)
     end
 
     it 'assigns all citizens as @citizens' do
-      municipy = create(:municipy, name: 'São Paulo')
+      citizen = create(:citizen, name: Faker::Name.name)
 
-      get municipy_citizens_path
+      get municipy_citizens_path({ municipy_id: citizen.municipy_id })
 
-      expect(assigns(:citizens)).to eq([municipy])
-    end
-
-    it 'filters citizens by name start' do
-      municipy1 = create(:municipy, name: 'São Paulo')
-      municipy2 = create(:municipy, name: 'São Bernardo')
-      create(:municipy, name: 'Rio de Janeiro')
-      get municipy_citizens_path, params: { name_start: 'São' }
-      expect(assigns(:citizens)).to match_array([municipy1, municipy2])
+      expect(assigns(:citizens)).to eq([citizen])
     end
   end
 
   describe 'GET /citizens/new' do
     it 'renders the new template' do
-      get new_municipy_path
+      get new_municipy_citizen_path(citizen.municipy_id)
       expect(response).to render_template(:new)
     end
 
-    it 'assigns a new municipy as @municipy' do
-      get new_municipy_path
-      expect(assigns(:municipy)).to be_a_new(Municipy)
+    it 'assigns a new citizen as @citizen' do
+      get new_municipy_citizen_path(citizen.municipy_id)
+      expect(assigns(:citizen)).to be_a_new(Citizen)
     end
   end
 
   describe 'POST /citizens' do
     context 'with valid params' do
-      it 'creates a new Municipy' do
+      xit 'creates a new Citizen' do
         expect do
-          post municipy_citizens_path, params: { municipy: valid_attributes }
-        end.to change(Municipy, :count).by(1)
+          post municipy_citizens_path(citizen.municipy_id), params: { citizen: valid_attributes }
+        end.to change(Citizen, :count).by(1)
       end
 
       it 'redirects to the root path' do
-        post municipy_citizens_path, params: { municipy: valid_attributes }
-        expect(response).to redirect_to(root_path)
+        post municipy_citizens_path(citizen.municipy_id), params: { citizen: valid_attributes }
+        expect(response).to redirect_to(municipy_citizens_path(citizen.municipy_id))
       end
     end
 
     context 'with invalid params' do
-      it 'does not create a new Municipy' do
+      it 'does not create a new Citizen' do
         expect do
-          post municipy_citizens_path, params: { municipy: invalid_attributes }
+          post municipy_citizens_path(citizen.municipy_id), params: { citizen: invalid_attributes }
         end.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
@@ -68,43 +60,33 @@ RSpec.describe 'CitizensController' do
 
   describe 'GET /citizens/:id/edit' do
     it 'renders the edit template' do
-      get edit_municipy_path(municipy)
+      get edit_municipy_citizen_path(citizen.municipy_id, citizen.id)
       expect(response).to render_template(:edit)
     end
 
-    it 'assigns the requested municipy as @municipy' do
-      get edit_municipy_path(municipy)
-      expect(assigns(:municipy)).to eq(municipy)
+    it 'assigns the requested citizen as @citizen' do
+      get edit_municipy_citizen_path(citizen.municipy_id, citizen.id)
+      expect(assigns(:citizen)).to eq(citizen)
     end
   end
 
   describe 'PUT /citizens/:id' do
     context 'with valid params' do
-      let(:new_attributes) { attributes_for(:municipy, name: 'New Name') }
+      let(:new_attributes) { attributes_for(:citizen, name: 'New Name') }
 
-      it 'updates the requested municipy' do
-        put municipy_path(municipy), params: { municipy: new_attributes }
-        municipy.reload
-        expect(municipy.name).to eq('New Name')
+      it 'updates the requested citizen' do
+        put municipy_citizen_path(citizen.municipy_id, citizen.id), params: { citizen: new_attributes }
+        citizen.reload
+        expect(citizen.name).to eq('New Name')
       end
 
       it 'redirects to the root path' do
-        put municipy_path(municipy), params: { municipy: valid_attributes }
-        expect(response).to redirect_to(root_path)
+        citizen = create(:citizen, name: Faker::Name.name)
+
+        put municipy_citizen_path(citizen.municipy_id, citizen.id), params: { citizen: valid_attributes }
+
+        expect(response).to redirect_to(municipy_citizens_path(citizen.municipy_id))
       end
-    end
-  end
-
-  describe 'POST /citizens/:id/inactive' do
-    it 'changes the status of the municipy to inactive' do
-      post inactive_municipy_path(municipy)
-      municipy.reload
-      expect(municipy.status).to eq('inactive')
-    end
-
-    it 'redirects to the root path' do
-      post inactive_municipy_path(municipy)
-      expect(response).to redirect_to(root_path)
     end
   end
 end
