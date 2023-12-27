@@ -1,24 +1,59 @@
-# README
+### municipes census
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Install
+Inside the folder of application execute:
 
-Things you may want to cover:
+```
+docker-compose up --build -d
+```
 
-* Ruby version
+### Create database development and test
 
-* System dependencies
+execute this command for development:
+```
+docker exec  municipies-census_web_1 bundle e rails db:create RAILS_ENV=development
+```
 
-* Configuration
+execute this command for test:
+```
+docker exec  municipies-census_web_1 bundle e rails db:create RAILS_ENV=test
+```
 
-* Database creation
+### Create the tables
 
-* Database initialization
+execute this command for development:
+```
+docker exec municipies-census_web_1 bundle e rails db:migrate RAILS_ENV=development
+```
 
-* How to run the test suite
+execute this command for test:
+```
+docker exec municipies-census_web_1 bundle e rails db:migrate RAILS_ENV=test
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+# Web app
+access http://app.municipies-census.localhost
+or
+access http://localhost:3010
 
-* Deployment instructions
+# Docker
 
-* ...
+### Exec command inside postgres container
+```
+docker exec  municipies-census_postgres_1 psql -U company -c 'CREATE DATABASE municipies_census_development;'
+```
+
+# Troubleshoot
+### Css not compiled
+```
+docker exec  municipies-census_web_1 bundle e rails tailwindcss:build
+```
+
+# TODO
+
+Endereço
+
+2.1 Campos: `CEP, Logradouro, complemento, bairro, cidade, UF e código IBGE`;
+
+2.2 Todos os dados são obrigatórios, exceto complemento e código IBGE;
+
