@@ -16,7 +16,7 @@ module Municipies
     private
 
     def create_municipy
-      if @params[:id]
+      if @params[:id].present?
         @municipy = Municipy.find(@params[:id])
         @municipy.update!(@params)
         @municipy.reload

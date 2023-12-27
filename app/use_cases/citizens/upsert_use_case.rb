@@ -16,14 +16,13 @@ module Citizens
     private
 
     def create_citizen
-      if @params[:id]
-        @citizen = Citizen.find(@params[:id])
-        @citizen.update!(@params)
+      if @params[:id].nil?
+        @citizen = ::Citizen.create!(@params)
+      else
+        @citizen = Citizen.find_by!(id: @params[:id], municipy_id: @params[:municipy_id])
+        @citizen.update!(@params.except(:municipy_id))
         @citizen.reload
-        return
       end
-
-      @citizen = ::Citizen.create!(@params)
     end
   end
 end

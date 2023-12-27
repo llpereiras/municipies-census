@@ -6,37 +6,43 @@ class CitizensController < ApplicationController
   end
 
   def new
-    @citizen = Citizen.new(municipy: Municipy.find(params[:municipy_id]))
+    @municipy = Municipy.find(params[:municipy_id])
+    @citizen = Citizen.new(municipy: @municipy)
   end
 
   def create
     Citizens::UpsertUseCase.call(upsert_params)
 
-    redirect_to root_path
+    redirect_citizens_index
   end
 
   def edit
+    @municipy = Municipy.find(params[:municipy_id])
     @citizen = CitizensQuery.call(params: { id: params[:id] }).first
   end
 
   def update
     Citizens::UpsertUseCase.call(upsert_params)
 
-    redirect_to root_path
+    redirect_citizens_index
   end
 
   def inactive
     Citizens::InactiveUseCase.call(params[:id])
 
-    redirect_to root_path
+    redirect_citizens_index
   end
 
   private
 
+  def redirect_citizens_index
+    redirect_to municipy_citizens_url(params[:municipy_id])
+  end
+
   def upsert_params
     params.require(:citizen)
-          .permit(:name, :status, :cpf, :cns, :email, :birthday, :phone, :photo)
-          .merge(municipy_id: params[:municipy_id])
+          .permit(:name, :status, :cpf, :cns, :email, :birthday, :phone, :photo, :municipy_id)
+          .merge(municipy_id: params[:municipy_id], id: params[:id]).compact_blank
   end
 
   def search_params

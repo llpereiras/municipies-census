@@ -1,7 +1,7 @@
 <div class="main w-max m-auto mt-10">
   <h2 class="text-2xl mb-6">New Citizen</h2>
 
-  <%= form_for(@citizen, url: municipy_citizens_path(@citizen.municipy_id), method: :post) do |f| %>
+  <%= form_for([@municipy, @citizen]) do |f| %>
     <div class="flex rounded text-gray-500 mb-4">
       <%= f.text_field :name, autofocus: true, autocomplete: "name",
         class: "outline-none px-4 h-full py-2 text-lg",
