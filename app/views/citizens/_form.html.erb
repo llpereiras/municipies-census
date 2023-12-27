@@ -1,0 +1,63 @@
+<div class="main w-max m-auto mt-10">
+  <h2 class="text-2xl mb-6">New Citizen</h2>
+
+  <%= form_for(@citizen, url: municipy_citizens_path(@citizen.municipy_id), method: :post) do |f| %>
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.text_field :name, autofocus: true, autocomplete: "name",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "name of citizen"
+      %>
+    </div>
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.number_field :cpf, autofocus: true, autocomplete: "cpf",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "cpf of citizen"
+      %>
+    </div>
+
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.text_field :cns, autofocus: true, autocomplete: "cns",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "cns of citizen"
+      %>
+    </div>
+
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "email of citizen"
+      %>
+    </div>
+
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.date_field :birthday, autofocus: true, autocomplete: "birthday",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "birthday of citizen"
+      %>
+    </div>
+
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.text_field :phone, autofocus: true, autocomplete: "phone",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "phone of citizen"
+      %>
+    </div>
+
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.file_field :photo, autofocus: true, autocomplete: "photo",
+        class: "outline-none px-4 h-full py-2 text-lg",
+        placeholder: "photo of citizen"
+      %>
+    </div>
+
+    <% unless @citizen.new_record? %>
+    <div class="flex rounded text-gray-500 mb-4">
+      <%= f.select(:status, Citizen.statuses, :prompt => 'Select') %>
+    </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Save", class: "rounded mt-6 px-4 bg-blue-500" %>
+    </div>
+  <% end %>
+</div>

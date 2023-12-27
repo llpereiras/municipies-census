@@ -13,10 +13,11 @@
       <td><%= municipy.name %></td>
       <td><%= municipy.status %></td>
       <td class="flex flex-row">
-        <%= link_to('Edit', edit_municipy_path(municipy.id), class: "rounded mt-6 px-4 bg-blue-300") %>
+        <%= link_to('Edit', edit_municipy_path(municipy.id), class: "rounded mt-6 px-4  mx-4 bg-blue-300") %>
         <%= form_for :municipy, url: inactive_municipy_path(municipy.id), method: :post do |f|%>
-          <%= f.submit "Inactive", class: "rounded mt-6 px-4 bg-red-500" %>
+          <%= f.submit "Inactive", class: "rounded mt-6 px-4 mx-4 bg-red-500" %>
         <%end%>
+        <%= link_to('Citizens', municipy_citizens_path(municipy.id), class: "rounded mt-6 px-4 mx-4 bg-blue-300") %>
       </td>
     </tr>
   <% end %>

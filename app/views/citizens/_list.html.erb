@@ -1,0 +1,21 @@
+<table class="w-full p-5 text-gray-700">
+  <thead>
+    <tr>
+      <th class="text-left text-blue-900">Name</th>
+      <th class="text-left text-blue-900">Status</th>
+      <th class="text-left text-blue-900">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @citizens.each do |citizen| %>
+    <tr>
+      <td><%= citizen.name %></td>
+      <td><%= citizen.status %></td>
+      <td class="flex flex-row">
+        <%= link_to('Edit', edit_municipy_citizen_path(citizen.municipy_id, citizen.id), class: "rounded mt-6 px-4 bg-blue-300") %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
