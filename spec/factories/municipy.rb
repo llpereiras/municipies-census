@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :municipy do
-    name { Faker::Company.name }
+    name { Faker::Mountain.name }
   end
 
   trait :inactive do

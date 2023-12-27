@@ -2,36 +2,36 @@
 
 require 'rails_helper'
 
-RSpec.describe 'MunicipiesController', type: :request do
-  let(:municipy) { create(:municipy) }
-  let(:valid_attributes) { attributes_for(:municipy) }
-  let(:invalid_attributes) { attributes_for(:municipy, name: nil) }
+RSpec.describe 'CitizensController' do
+  let(:citizen) { create(:citizen) }
+  let(:valid_attributes) { attributes_for(:citizen) }
+  let(:invalid_attributes) { attributes_for(:citizen, name: nil) }
 
-  describe 'GET /municipies' do
+  describe 'GET /citizens' do
     it 'renders the index template' do
-      get municipies_path
+      get "/municipes/#{citizen.municipy_id}/citizens"
 
       expect(response).to render_template(:index)
     end
 
-    it 'assigns all municipies as @municipies' do
+    it 'assigns all citizens as @citizens' do
       municipy = create(:municipy, name: 'São Paulo')
 
-      get municipies_path
+      get municipy_citizens_path
 
-      expect(assigns(:municipies)).to eq([municipy])
+      expect(assigns(:citizens)).to eq([municipy])
     end
 
-    it 'filters municipies by name start' do
+    it 'filters citizens by name start' do
       municipy1 = create(:municipy, name: 'São Paulo')
       municipy2 = create(:municipy, name: 'São Bernardo')
       create(:municipy, name: 'Rio de Janeiro')
-      get municipies_path, params: { name_start: 'São' }
-      expect(assigns(:municipies)).to match_array([municipy1, municipy2])
+      get municipy_citizens_path, params: { name_start: 'São' }
+      expect(assigns(:citizens)).to match_array([municipy1, municipy2])
     end
   end
 
-  describe 'GET /municipies/new' do
+  describe 'GET /citizens/new' do
     it 'renders the new template' do
       get new_municipy_path
       expect(response).to render_template(:new)
@@ -43,16 +43,16 @@ RSpec.describe 'MunicipiesController', type: :request do
     end
   end
 
-  describe 'POST /municipies' do
+  describe 'POST /citizens' do
     context 'with valid params' do
       it 'creates a new Municipy' do
         expect do
-          post municipies_path, params: { municipy: valid_attributes }
+          post municipy_citizens_path, params: { municipy: valid_attributes }
         end.to change(Municipy, :count).by(1)
       end
 
       it 'redirects to the root path' do
-        post municipies_path, params: { municipy: valid_attributes }
+        post municipy_citizens_path, params: { municipy: valid_attributes }
         expect(response).to redirect_to(root_path)
       end
     end
@@ -60,13 +60,13 @@ RSpec.describe 'MunicipiesController', type: :request do
     context 'with invalid params' do
       it 'does not create a new Municipy' do
         expect do
-          post municipies_path, params: { municipy: invalid_attributes }
+          post municipy_citizens_path, params: { municipy: invalid_attributes }
         end.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
   end
 
-  describe 'GET /municipies/:id/edit' do
+  describe 'GET /citizens/:id/edit' do
     it 'renders the edit template' do
       get edit_municipy_path(municipy)
       expect(response).to render_template(:edit)
@@ -78,7 +78,7 @@ RSpec.describe 'MunicipiesController', type: :request do
     end
   end
 
-  describe 'PUT /municipies/:id' do
+  describe 'PUT /citizens/:id' do
     context 'with valid params' do
       let(:new_attributes) { attributes_for(:municipy, name: 'New Name') }
 
@@ -95,7 +95,7 @@ RSpec.describe 'MunicipiesController', type: :request do
     end
   end
 
-  describe 'POST /municipies/:id/inactive' do
+  describe 'POST /citizens/:id/inactive' do
     it 'changes the status of the municipy to inactive' do
       post inactive_municipy_path(municipy)
       municipy.reload

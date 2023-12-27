@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class MunicipiesQuery < BaseQuery
+class CitizensQuery < BaseQuery
   def self.base_relation
     query_table.all
   end
 
   def self.query_table
-    Municipy
+    Citizen
   end
 
   def apply_filters
@@ -16,10 +16,10 @@ class MunicipiesQuery < BaseQuery
 
   def order_attributes
     {
-      name_asc: 'municipies.name asc',
-      name_desc: 'municipies.name desc',
-      id_asc: 'municipies.id asc',
-      id_desc: 'municipies.id desc'
+      name_asc: 'citizens.name asc',
+      name_desc: 'citizens.name desc',
+      id_asc: 'citizens.id asc',
+      id_desc: 'citizens.id desc'
     }
   end
 
@@ -34,9 +34,9 @@ class MunicipiesQuery < BaseQuery
   def filter_by_name_start
     return if params[:name_start].blank?
 
-    municipies = self.class.query_table.arel_table
+    citizens = self.class.query_table.arel_table
     @relation = relation.where(
-      municipies[:name].matches("#{params[:name_start]}%")
+      citizens[:name].matches("#{params[:name_start]}%")
     )
   end
 
