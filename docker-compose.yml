@@ -15,6 +15,9 @@ services:
       VIRTUAL_HOST: app.municipies-census.localhost
       DATABASE_URL: postgres://company:dev@postgres
       RAILS_ENV: development
+      PHONE_SEND: '+551111111111'
+      TWILIO_SID: 'twilio_sid'
+      TWILIO_SECRET: 'twilio_secret'
     ports:
       - 3010:3010
     networks:
