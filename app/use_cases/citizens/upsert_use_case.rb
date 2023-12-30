@@ -23,6 +23,8 @@ module Citizens
         @citizen.update!(@params.except(:municipy_id))
         @citizen.reload
       end
+
+      Citizens::SendCommunicationJob.perform(@citizen.phone, 'Welcome')
     end
   end
 end

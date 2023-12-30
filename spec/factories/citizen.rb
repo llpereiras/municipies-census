@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :citizen do
-    association :municipy, factory: :municipy
+    municipy factory: %i[municipy]
     name { Faker::Company.name }
 
     cpf { '32586104447' }

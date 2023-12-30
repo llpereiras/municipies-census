@@ -11,8 +11,10 @@ gem 'pg', '~> 1.1'
 gem 'phonelib'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 7.0.8'
+gem 'solid_queue'
 gem 'sprockets-rails'
 gem 'tailwindcss-rails'
+gem 'twilio-ruby', '~> 6.9.0'
 gem 'tzinfo-data'
 
 group :development, :test do
