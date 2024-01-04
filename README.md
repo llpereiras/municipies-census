@@ -31,6 +31,12 @@ execute this command for test:
 docker exec municipies-census_web_1 bundle e rails db:migrate RAILS_ENV=test
 ```
 
+### Create index on elastic
+```
+docker exec municipies-census_web_1 bundle e rails search:create_index RAILS_ENV=development
+```
+
+
 # Web app
 access http://app.municipies-census.localhost
 or
@@ -49,11 +55,12 @@ docker exec  municipies-census_postgres_1 psql -U company -c 'CREATE DATABASE mu
 docker exec  municipies-census_web_1 bundle e rails tailwindcss:build
 ```
 
-# TODO
+### Populate the index with all Citizens
+```
+docker exec  municipies-census_web_1 bundle e rails search:populate_index
+```
 
+# TODO
 Endereço
 
 2.1 Campos: `CEP, Logradouro, complemento, bairro, cidade, UF e código IBGE`;
-
-2.2 Todos os dados são obrigatórios, exceto complemento e código IBGE;
-

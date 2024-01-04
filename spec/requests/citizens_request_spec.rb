@@ -16,6 +16,9 @@ RSpec.describe 'CitizensController' do
 
     it 'assigns all citizens as @citizens' do
       citizen = create(:citizen, name: Faker::Name.name)
+      search = ['_source' => citizen.attributes]
+
+      allow(Search::ElasticRepository).to receive(:search).and_return(search)
 
       get municipy_citizens_path({ municipy_id: citizen.municipy_id })
 

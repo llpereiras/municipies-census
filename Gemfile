@@ -8,6 +8,7 @@ gem 'bootsnap', require: false
 gem 'cpf_cnpj'
 gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'
+gem 'opensearch-ruby'
 gem 'pg', '~> 1.1'
 gem 'phonelib'
 gem 'puma'

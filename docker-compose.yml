@@ -11,9 +11,11 @@ services:
         target: /var/app
     depends_on:
       - postgres
+      - opensearch
     environment:
       VIRTUAL_HOST: app.municipies-census.localhost
       DATABASE_URL: postgres://company:dev@postgres
+      ELASTIC_URL: http://opensearch:9200
       RAILS_ENV: development
       PHONE_SEND: '+551111111111'
       TWILIO_SID: 'twilio_sid'
@@ -50,9 +52,22 @@ services:
     networks:
       - company-network
 
+  opensearch:
+    image: opensearchproject/opensearch:1.2.3
+    ports:
+      - 9200:9200
+    volumes:
+      - opensearch:/usr/share/opensearch/data
+      - ./opensearch.yml:/usr/share/opensearch/config/opensearch.yml
+    environment:
+      discovery.type: single-node
+    networks:
+      - company-network
+
 volumes:
   bundle_vendor:
   pgdata:
+  opensearch:
 
 networks:
   company-network:
