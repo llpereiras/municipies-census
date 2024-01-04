@@ -8,6 +8,8 @@ RUN apk add --no-cache g++ \
   make \
   postgresql-dev \
   curl \
+  libffi-dev \
+  vips-dev \
   && rm -rf /var/cache/apk/*
 
 WORKDIR /var/app
