@@ -9,14 +9,14 @@ class MunicipiesController < ApplicationController
     @municipy = Municipy.new
   end
 
+  def edit
+    @municipy = MunicipiesQuery.call(params: { id: params[:id] }).first
+  end
+
   def create
     Municipies::UpsertUseCase.call(upsert_params)
 
     redirect_to root_path
-  end
-
-  def edit
-    @municipy = MunicipiesQuery.call(params: { id: params[:id] }).first
   end
 
   def update

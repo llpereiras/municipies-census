@@ -34,7 +34,7 @@ RSpec.describe CitizensQuery do
         citizen1
         citizen2
         citizen3
-        expect(query).to match_array([citizen1, citizen2])
+        expect(query).to contain_exactly(citizen1, citizen2)
       end
     end
   end

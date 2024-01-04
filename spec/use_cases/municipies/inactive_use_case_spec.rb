@@ -11,8 +11,8 @@ RSpec.describe Municipies::InactiveUseCase, type: :use_case do
       expect { use_case }.to change { municipy.reload.status }.to('inactive')
     end
 
-    xit 'logs the inactivity of the municipy' do
-      # TODO: implement the expectation for the log
+    it 'logs the inactivity of the municipy', :skip do
+      pending 'Expectation for the log needs to be implemented'
     end
   end
 end
