@@ -12,7 +12,6 @@ class Citizen < ApplicationRecord
   validates :name, presence: true
   validates :birthday, presence: true
   validates :phone, presence: true
-  validates :photo, presence: true
 
   validate :cns_validator
   validate :cpf_validator

@@ -3,7 +3,7 @@ module Citizens
     queue_as :default
 
     def perform(citizen)
-      CitizenMailer.update_information(citizen).delivery_later
+      CitizenMailer.update_information(citizen).deliver_now
     end
   end
 end

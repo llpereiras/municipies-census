@@ -1,7 +1,7 @@
 class CitizenMailer < ApplicationMailer
-  def update_information(citizen)
-    @citizen = citizen
+  def update_information(email)
+    @email = email
 
-    mail to: @citizen.email
+    mail to: @email
   end
 end

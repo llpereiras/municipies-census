@@ -9,6 +9,8 @@ module Twilio
           to:,
           body:
         )
+      rescue Twilio::REST::RestError
+        Rails.logger.error('Authentication Error - invalid username')
       end
     end
   end
