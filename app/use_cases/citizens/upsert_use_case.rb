@@ -24,7 +24,7 @@ module Citizens
         @citizen.reload
       end
 
-      Citizens::SendCommunicationJob.perform(@citizen.phone, 'Welcome')
+      Citizens::SendCommunicationJob.perform_now(@citizen, 'Welcome')
     end
   end
 end
