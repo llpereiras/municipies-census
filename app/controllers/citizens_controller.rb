@@ -2,7 +2,8 @@
 
 class CitizensController < ApplicationController
   def index
-    @citizens = CitizensQuery.call(params: search_params)
+    search = Search::ElasticRepository.search(search_params[:name_start])
+    @citizens = CitizenAdapter.from_elastic(search)
   end
 
   def new

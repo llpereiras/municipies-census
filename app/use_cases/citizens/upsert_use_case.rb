@@ -25,6 +25,7 @@ module Citizens
       end
 
       Citizens::SendCommunicationJob.perform_now(@citizen, 'Welcome')
+      Citizens::Elastic::Populate.perform_now(@citizen)
     end
   end
 end
