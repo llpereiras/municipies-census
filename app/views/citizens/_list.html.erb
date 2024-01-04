@@ -1,6 +1,7 @@
 <table class="w-full p-5 text-gray-700">
   <thead>
     <tr>
+      <th class="text-left text-blue-900">Photo</th>
       <th class="text-left text-blue-900">Name</th>
       <th class="text-left text-blue-900">Status</th>
       <th class="text-left text-blue-900">Actions</th>
@@ -10,6 +11,7 @@
   <tbody>
     <% @citizens.each do |citizen| %>
     <tr>
+      <td><%= citizen.photo.attached? ? image_tag(citizen.photo.variant(resize_to_limit: [200, 200])) : nil %></td>
       <td><%= citizen.name %></td>
       <td><%= citizen.status %></td>
       <td class="flex flex-row">

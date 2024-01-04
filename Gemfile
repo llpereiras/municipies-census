@@ -6,6 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.2.2'
 gem 'bootsnap', require: false
 gem 'cpf_cnpj'
+gem 'image_processing', '~> 1.2'
 gem 'importmap-rails'
 gem 'pg', '~> 1.1'
 gem 'phonelib'
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'rubocop-performance', '~> 1.19'
   gem 'rubocop-rails', '~> 2.21'
   gem 'rubocop-rspec', '~> 2.24'
+  gem 'shoulda-matchers'
 end
 
 group :development do
