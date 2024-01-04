@@ -5,8 +5,35 @@ require:
   - rubocop-rails
   - rubocop-rspec
 
+AllCops:
+  NewCops: enable
+
 Style/Documentation:
   Enabled: false
 
 Lint/MissingSuper:
+  Enabled: false
+
+Metrics/MethodLength:
+  Exclude:
+    - db/migrate/*
+
+Metrics/AbcSize:
+  Exclude:
+    - db/migrate/*
+
+Metrics/BlockLength:
+  Exclude:
+    - config/environments/development.rb
+
+Rspec/MultipleExpectations:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false
+
+RSpec/PendingWithoutReason:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
   Enabled: false

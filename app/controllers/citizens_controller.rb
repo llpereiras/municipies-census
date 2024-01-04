@@ -10,15 +10,15 @@ class CitizensController < ApplicationController
     @citizen = Citizen.new(municipy: @municipy)
   end
 
+  def edit
+    @municipy = Municipy.find(params[:municipy_id])
+    @citizen = CitizensQuery.call(params: { id: params[:id] }).first
+  end
+
   def create
     Citizens::UpsertUseCase.call(upsert_params)
 
     redirect_citizens_index
-  end
-
-  def edit
-    @municipy = Municipy.find(params[:municipy_id])
-    @citizen = CitizensQuery.call(params: { id: params[:id] }).first
   end
 
   def update

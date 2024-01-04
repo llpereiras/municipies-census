@@ -34,7 +34,7 @@ RSpec.describe MunicipiesQuery do
         municipy1
         municipy2
         municipy3
-        expect(query).to match_array([municipy1, municipy2])
+        expect(query).to contain_exactly(municipy1, municipy2)
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'MunicipiesController', type: :request do
+RSpec.describe 'MunicipiesController' do
   let(:municipy) { create(:municipy) }
   let(:valid_attributes) { attributes_for(:municipy) }
   let(:invalid_attributes) { attributes_for(:municipy, name: nil) }
@@ -27,7 +27,7 @@ RSpec.describe 'MunicipiesController', type: :request do
       municipy2 = create(:municipy, name: 'São Bernardo')
       create(:municipy, name: 'Rio de Janeiro')
       get municipies_path, params: { name_start: 'São' }
-      expect(assigns(:municipies)).to match_array([municipy1, municipy2])
+      expect(assigns(:municipies)).to contain_exactly(municipy1, municipy2)
     end
   end
 
