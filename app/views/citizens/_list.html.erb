@@ -24,6 +24,7 @@
       <td><%= citizen.status %></td>
       <td class="flex flex-row">
         <%= link_to('Edit', edit_municipy_citizen_path(citizen.municipy_id, citizen.id), class: "rounded mt-6 px-4 bg-blue-300") %>
+        <%= link_to "show modal", address_municipy_citizen_path(citizen.municipy_id, citizen.id), remote: true %>
       </td>
     </tr>
   <% end %>

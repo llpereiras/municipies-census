@@ -59,8 +59,3 @@ docker exec  municipies-census_web_1 bundle e rails tailwindcss:build
 ```
 docker exec  municipies-census_web_1 bundle e rails search:populate_index
 ```
-
-# TODO
-Endereço
-
-2.1 Campos: `CEP, Logradouro, complemento, bairro, cidade, UF e código IBGE`;

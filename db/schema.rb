@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_29_145206) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_30_101507) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_145206) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "address", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "citizen_id", null: false
+    t.string "zip_code", null: false, comment: "the zip code of the address"
+    t.string "street", null: false, comment: "the name of the street of the address"
+    t.string "complement", null: false, comment: "the complement of the address, such as number, apartment, etc."
+    t.string "neighborhood", null: false, comment: "the name of the neighborhood of the address"
+    t.string "city", null: false, comment: "the name of the city of the address"
+    t.string "state", null: false, comment: "the abbreviation of the state of the address"
+    t.string "ibge_code", null: false, comment: "the IBGE code of the municipality of the address"
+    t.index ["citizen_id"], name: "index_address_on_citizen_id"
   end
 
   create_table "citizens", force: :cascade do |t|
@@ -158,6 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_29_145206) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "address", "citizens"
   add_foreign_key "citizens", "municipies"
   add_foreign_key "solid_queue_blocked_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_claimed_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade

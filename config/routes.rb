@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     member do
       post :inactive
     end
-    resources :citizens, except: %i[destroy show]
+    resources :citizens, except: %i[destroy show] do
+      member do
+        post :address
+      end
+    end
   end
 end
